@@ -2,22 +2,42 @@ import React, { useState } from 'react';
 import Input from "../../../components/UI/Input/Input";
 import axios from 'axios';
 
-const SignInForm = () =>{
+const SignInForm = (props) =>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("null");
+    const [isValid, setIsValid] = useState(false);
 
+    const checkValidity = (props) => {
+        const emailPattern =   /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+        const passPattern =  /.{8,}/;
+        const validation = {
+            emailIsValid: false,
+            passwordIsValid: false
+        }
+        validation.emailIsValid = emailPattern.test(props.email);
+        validation.passwordIsValid =passPattern.test(props.password);
+        return(
+            validation
+        )
+    }
     const loginHandler = (event) => {
         event.preventDefault();
+
         const credentials = {
-            email: email,
+            user: email,
             password: password
         }
+       setIsValid(checkValidity({email: email, password: password} ));
 
-        axios.post("http://localhost:8080/login", credentials);
 
+        if(!isValid.email && !isValid.password){
+            alert("Something went wrong. Email should have example@com.pl form and password should have 8 chars or more.")
+        } else {
+            axios.post("http://localhost:8080/login", credentials)
+                .then(response => props.history.push("/"))
+        }
     }
     const inputChangeHandler = (event, type) => {
-        console.log("Inputhandler "+ event.target.value);
             if(type === "email"){
                 setEmail(event.target.value);
             } else if (type === "pass") {
