@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
+import { NavLink } from "react-router-dom";
 import Navbar from '../../components/Navbar/Navbar';
-import Button from "../../components/UI/Button/Button";
+import styleClasses from './BookingClone.module.css';
 
 const BookingClone = (props) => {
 
     return (
-        <Navbar>
-            <Button clicked={false}>Sign In</Button>
-            <Button clicked={false}>Sign Up</Button>
-        </Navbar>
+        <Fragment>
+            <Navbar>
+                <NavLink to="/login">Sign In</NavLink>
+            </Navbar>
+            <main className={styleClasses.Content}>
+                {props.children}
+            </main>
+        </Fragment>
+
     )
 }
 export default BookingClone;
