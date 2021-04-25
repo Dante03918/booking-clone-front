@@ -1,13 +1,13 @@
 import React, {useEffect, useState, useRef } from 'react';
 import styleClasses from './SignInForm.module.css';
+import postRequest from '../../../Api';
 
-import axios from 'axios';
 
 const SignInForm = () =>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("null");
-    const [emailIsValid, setEmailIsValid] = useState(false);
-    const [passwordIsValid, setPasswordIsValid] = useState(false);
+    const [emailIsValid, setEmailIsValid] = useState(true);
+    const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [submitted, setSubmitted] = useState(false);
     const [emailInputStyles, setEmailInputStyles] = useState([styleClasses.InputElement]);
     const [passwordInputStyles, setPasswordInputStyles] = useState([styleClasses.InputElement]);
@@ -59,24 +59,14 @@ const SignInForm = () =>{
              passwordInputStyles.push(styleClasses.Invalid);
          }
         setSubmitted(false);
+
+
+        if(emailIsValid && passwordIsValid){
+            postRequest({email: email ,password: password});
+        }
     }
 
-    // const loginHandler = (event) => {
-    //     event.preventDefault();
-    //
-    //     const credentials = {
-    //         user: email,
-    //         password: password
-    //     }
-       //setIsValid(checkValidity({email: email, password: password} ));
 
-
-        // if(!isValid.email && !isValid.password){
-        //     alert("Something went wrong. Email should have example@com.pl form and password should have 8 chars or more.")
-        // } else {
-        //     axios.post("http://localhost:8080/login", credentials)
-        //         .then(response => props.history.push("/"))
-        // }
 
     const inputChangeHandler = (event, type) => {
             if(type === "email"){
