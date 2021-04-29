@@ -1,14 +1,10 @@
-import React from 'react';
 import axios from 'axios';
+export const loginRequest = (props) => {
 
-const postRequest = (props) => {
-
-    const credentials = {
+    const credentials ={
         email: props.email,
         password: props.password
     }
-    console.log("Request " + credentials.email + "  " + credentials.password)
-    // axios.post("http://localhost:8080/login", credentials)
-    //     .then(() => props.history.push("/"))
+    console.log(props.email + "----" + props.password)
+    axios.post("http://localhost:8080/login", credentials)
 }
-export default postRequest;

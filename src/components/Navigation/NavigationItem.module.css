@@ -1,0 +1,18 @@
+.NavigationItems {
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+}
+
+.NavigationItem {
+    margin: 10px 0;
+    padding: 10px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+}

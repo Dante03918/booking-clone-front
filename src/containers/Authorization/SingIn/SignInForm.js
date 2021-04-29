@@ -1,13 +1,11 @@
-import React, {useEffect, useState, useRef } from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import styleClasses from './SignInForm.module.css';
-import postRequest from '../../../Api';
+import {loginRequest} from '../../../Api';
 
 
-const SignInForm = () =>{
+const SignInForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("null");
-    const [emailIsValid, setEmailIsValid] = useState(true);
-    const [passwordIsValid, setPasswordIsValid] = useState(true);
     const [submitted, setSubmitted] = useState(false);
     const [emailInputStyles, setEmailInputStyles] = useState([styleClasses.InputElement]);
     const [passwordInputStyles, setPasswordInputStyles] = useState([styleClasses.InputElement]);
@@ -17,8 +15,8 @@ const SignInForm = () =>{
     const isFirstRun = useRef(true);
 
 
-    useEffect(()=>{
-        if(isFirstRun.current){
+    useEffect(() => {
+        if (isFirstRun.current) {
             isFirstRun.current = false;
             return;
         } else {
@@ -26,16 +24,23 @@ const SignInForm = () =>{
         }
     }, [submitted])
 
-    const checkValidity = (props) => {
+    const checkValidity = () => {
 
+        const conditions = {
+            emailIsValid: true,
+            passwordIsValid: true
+        }
 
-        const emailPattern =   /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
-        const passPattern =  /.{8,}/;
+        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+        const passPattern = /.{8,}/;
         console.log("check");
 
-        if(!emailPattern.test(email)){
+        if (!emailPattern.test(email)) {
             setEmailErrors("Email form is invalid");
-            setEmailIsValid(false);
+            emailInputStyles.push(styleClasses.Invalid);
+
+            conditions.emailIsValid = false;
+
         }
          if(email.length === 0){
              setEmailErrors("Email is required");
@@ -60,13 +65,7 @@ const SignInForm = () =>{
          }
         setSubmitted(false);
 
-
-        if(emailIsValid && passwordIsValid){
-            postRequest({email: email ,password: password});
-        }
     }
-
-
 
     const inputChangeHandler = (event, type) => {
             if(type === "email"){
@@ -77,19 +76,20 @@ const SignInForm = () =>{
 
     }
 
-    return(
-        <form  className={styleClasses.Input } onSubmit={(event) => {
+    return (
+        <form className={styleClasses.Input} onSubmit={(event) => {
             event.preventDefault();
             setSubmitted(true);
 
         }}>
-            <input className={emailInputStyles.join(' ')} type="text" placeholder="Enter email" onChange={(event) => (inputChangeHandler(event, "email"))}/>
+            <input className={emailInputStyles.join(' ')} type="text" placeholder="Enter email"
+                   onChange={(event) => (inputChangeHandler(event, "email"))}/>
             <p>{emailErrors}</p>
-            <input className={passwordInputStyles.join(' ')} type="text" placeholder="Enter password" onChange={(event) => (inputChangeHandler(event, "pass"))}/>
+            <input className={passwordInputStyles.join(' ')} type="text" placeholder="Enter password"
+                   onChange={(event) => (inputChangeHandler(event, "pass"))}/>
             <p>{passwordErrors}</p>
             <button type="submit">Submit</button>
-            {/*{console.log("Email is valid: " + emailIsValid)}*/}
-            {/*{console.log("Password is valid: " + passwordIsValid)}*/}
+
         </form>
     )
 
