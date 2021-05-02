@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { NavLink } from "react-router-dom";
 import Navbar from '../../components/Navbar/Navbar';
+import NavigationItem from "../../components/Navigation/NavigationItem";
 import styleClasses from './BookingClone.module.css';
 
 const BookingClone = (props) => {
@@ -8,7 +8,8 @@ const BookingClone = (props) => {
     return (
         <Fragment>
             <Navbar>
-                <NavLink to="/login">Sign In</NavLink>
+                <NavigationItem link="/login" title="Sign In"/>
+                <NavigationItem link="/register" title="Sign Up"/>
             </Navbar>
             <main className={styleClasses.Content}>
                 {props.children}

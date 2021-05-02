@@ -1,0 +1,11 @@
+.Logged {
+    width: 100%;
+    text-align: center;
+}
+
+.Logged p {
+    font-size: 5rem;
+    display: block;
+    margin: auto;
+    color: red;
+}

@@ -19,8 +19,10 @@ const SignInForm = () => {
         if (isFirstRun.current) {
             isFirstRun.current = false;
             return;
-        } else {
-           checkValidity();
+        } else if (submitted) {
+
+            checkValidity();
+
         }
     }, [submitted])
 
@@ -42,37 +44,49 @@ const SignInForm = () => {
             conditions.emailIsValid = false;
 
         }
-         if(email.length === 0){
-             setEmailErrors("Email is required");
-             setEmailIsValid(false);
-         }
+        if (email.length === 0) {
+            setEmailErrors("Email is required");
+            emailInputStyles.push(styleClasses.Invalid);
 
-         if(!passPattern.test(password)){
-             setPasswordErrors("Password is required");
-             setPasswordIsValid(false);
-         }
-         if(password.length === 0){
-             setPasswordErrors("Password must not be empty");
-             setPasswordIsValid(false);
-         }
+            conditions.emailIsValid = false;
 
-         if(!emailIsValid){
-             emailInputStyles.push(styleClasses.Invalid);
-         }
+        }
 
-         if(!passwordIsValid){
-             passwordInputStyles.push(styleClasses.Invalid);
-         }
+        if (!passPattern.test(password)) {
+            setPasswordErrors("Password is too short");
+            passwordInputStyles.push(styleClasses.Invalid);
+
+            conditions.passwordIsValid = false;
+        }
+        if (password.length === 0) {
+            setPasswordErrors("Password must not be empty");
+            passwordInputStyles.push(styleClasses.Invalid);
+
+            conditions.passwordIsValid = false;
+        }
+        if (conditions.emailIsValid && conditions.passwordIsValid) {
+            loginRequest({
+                email: email,
+                password: password
+            });
+        }
+
         setSubmitted(false);
 
     }
 
     const inputChangeHandler = (event, type) => {
-            if(type === "email"){
-                setEmail(event.target.value);
-            } else if (type === "pass") {
-                setPassword(event.target.value)
-            }
+
+        setEmailInputStyles([styleClasses.InputElement]);
+        setPasswordInputStyles([styleClasses.InputElement]);
+        setEmailErrors('');
+        setPasswordErrors('');
+
+        if (type === "email") {
+            setEmail(event.target.value);
+        } else if (type === "pass") {
+            setPassword(event.target.value)
+        }
 
     }
 
@@ -95,3 +109,4 @@ const SignInForm = () => {
 
 }
 export default SignInForm;
+

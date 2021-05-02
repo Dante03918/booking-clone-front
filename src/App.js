@@ -2,13 +2,15 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import BookingClone from './containers/BookingClone/BookingClone';
 import SignInForm from "./containers/Authorization/SingIn/SignInForm";
+import Logged from "./components/Logged";
+
 function App() {
   return (
-    <BookingClone>
+    <BookingClone >
         <Route path={"/"} component={BookingClone}/>
         <Route path={"/login"} component={SignInForm}/>
+        <Route path={"/logged"} component={Logged}/>
     </BookingClone>
-
   );
 }
 
