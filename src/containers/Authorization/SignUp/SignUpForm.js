@@ -27,6 +27,7 @@ const SignUpForm = () => {
         },
 
     });
+    const [gender, setGender] = useState('');
 
     const checkValidity = (value, type) => {
 
@@ -58,6 +59,11 @@ const SignUpForm = () => {
         setFormFields({...formFields, [type] : formElement});
 
     }
+
+    const radioButtonChangeHandler = (event) => {
+        setGender(event.target.value);
+        console.log(gender);
+    }
     const formElementsArray = [];
 
     for (let key in formFields) {
@@ -81,10 +87,13 @@ const SignUpForm = () => {
                 )
             )}
 
-            <input type='radio' id='man' value='man' name='gender' checked/>
-            <label htmlFor='man'>Man</label>
-            <input type='radio' id='woman' value='woman' name='gender'/>
-            <label htmlFor='woman'>Woman</label>
+
+                <input type='radio' id='man' value='man' name='gender' onChange={radioButtonChangeHandler}/>
+                <label htmlFor='man'>Man</label>
+                <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
+                <label htmlFor='woman'>Woman</label>
+
+
 
 
         </form>
