@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import styleClasses from './SignInForm.module.css';
+import styleClasses from '../FormStyle.module.css';
 import {loginRequest} from '../../../Api';
 
 

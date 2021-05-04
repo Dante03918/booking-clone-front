@@ -1,16 +1,18 @@
 import React from 'react';
-import styleClasses from './Input.module.css';
+import styleClasses from '../../../containers/Authorization/FormStyle.module.css';
 
 const input = (props) => {
-    const inputStyle = [styleClasses.InputElement];
 
-    if(props.valid.nameIsValid === false){
-        inputStyle.push(styleClasses.Invalid);
+const classes = [styleClasses.InputElement];
+
+    if(!props.isValid){
+        classes.push(styleClasses.Invalid)
     }
     return(
         <div className={styleClasses.Input}>
-            <input className={inputStyle.join(' ')}
-                   placeholder={props.label}
+            <input className={classes.join(' ')}
+                   placeholder={props.placeHolder}
+                   value={props.value}
                    onChange={props.changed}/>
         </div>
     )
