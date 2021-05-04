@@ -13,3 +13,7 @@ export const loginRequest = (props) => {
         .catch(error => alert("Coś nie pykło"))
 
 }
+
+export const signUpRequest = (props) => {
+    console.log(props.personalData)
+}

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styleClasses from '../FormStyle.module.css';
 import Input from '../../../components/UI/Input/Input';
 import { checkValidity } from "../../../utils/Validation/SignUpFormValidation/SignUpFormValidation";
+import { signUpRequest } from "../../../Api";
 
 const SignUpForm = () => {
 
@@ -47,6 +48,14 @@ const SignUpForm = () => {
         setGender(event.target.value);
         console.log(gender);
     }
+
+   const signUpFormSubmit = (event) => {
+        event.preventDefault();
+        signUpRequest({
+            personalData: formFields,
+            gender: gender
+        })
+   }
     const formElementsArray = [];
 
     for (let key in formFields) {
@@ -57,7 +66,7 @@ const SignUpForm = () => {
     }
 
     return (
-        <form className={styleClasses.Input}>
+        <form className={styleClasses.Input} onSubmit={signUpFormSubmit}>
 
             {formElementsArray.map(formElement => (
                     <Input key={formElement.id}
@@ -76,9 +85,7 @@ const SignUpForm = () => {
                 <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
                 <label htmlFor='woman'>Woman</label>
 
-
-
-
+            <button type='submit'>Submit</button>
         </form>
     )
 }
