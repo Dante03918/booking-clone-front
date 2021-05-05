@@ -10,22 +10,26 @@ const SignUpForm = () => {
         name: {
             placeHolder: 'Your name',
             value: '',
-            isValid: false
+            isValid: false,
+            error: ''
         },
         surname: {
             placeHolder: 'Your surname',
             value: '',
-            isValid: false
+            isValid: false,
+            error: ''
         },
         email: {
             placeHolder: 'Your email',
             value: '',
-            isValid: false
+            isValid: false,
+            error: ''
         },
         age: {
             placeHolder: 'Your age',
             value: '',
-            isValid: false
+            isValid: false,
+            error: ''
         },
 
     });
@@ -39,7 +43,17 @@ const SignUpForm = () => {
         const formElement = {...formElements[type]}
 
         formElement.value = event.target.value;
-        formElement.isValid = checkValidity(formElement.value, type)
+
+        const returnedObject = checkValidity(formElement.value, type);
+
+        formElement.isValid = returnedObject.isValid;
+
+        if(returnedObject.isValid){
+            formElement.error = '';
+        } else {
+            formElement.error = returnedObject.error;
+        }
+
         setFormFields({...formFields, [type] : formElement});
 
     }
@@ -68,15 +82,20 @@ const SignUpForm = () => {
     return (
         <form className={styleClasses.Input} onSubmit={signUpFormSubmit}>
 
-            {formElementsArray.map(formElement => (
-                    <Input key={formElement.id}
-                           placeHolder={formElement.config.placeHolder}
-                           value={formElement.config.value}
-                           changed={(event) => {
-                               inputChangeHandler(event, formElement.id)
-                           }}
-                           isValid={formElement.config.isValid}/>
+            {formElementsArray.map(formElement => {
+                return(
+                    <div key={formElement.id}>
+                        <Input
+                               placeHolder={formElement.config.placeHolder}
+                               value={formElement.config.value}
+                               changed={(event) => {
+                                   inputChangeHandler(event, formElement.id)
+                               }}
+                               isValid={formElement.config.isValid}/>
+                        <p>{formElement.config.error}</p>
+                    </div>
                 )
+                }
             )}
 
 
