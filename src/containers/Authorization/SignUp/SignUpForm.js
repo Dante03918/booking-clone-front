@@ -37,6 +37,7 @@ const SignUpForm = () => {
 
 
 
+
     const inputChangeHandler = (event, type) => {
 
         const formElements = {...formFields};
@@ -60,12 +61,11 @@ const SignUpForm = () => {
 
     const radioButtonChangeHandler = (event) => {
         setGender(event.target.value);
-        console.log(gender);
     }
 
    const signUpFormSubmit = (event) => {
         event.preventDefault();
-        signUpRequest({
+        const requestResult = signUpRequest({
             personalData: formFields,
             gender: gender
         })
