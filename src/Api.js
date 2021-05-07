@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useState} from "react";
 
 export const loginRequest = (props) => {
 
@@ -14,7 +15,9 @@ export const loginRequest = (props) => {
 
 }
 
-export const signUpRequest = (props) => {
+export const signUpRequest = async (props) => {
+
+
     const personalData = {
         name: props.personalData.name.value,
         surname: props.personalData.surname.value,
@@ -23,28 +26,7 @@ export const signUpRequest = (props) => {
         gender: props.gender.value
     }
 
-    const result = {
-        status: '',
-        text: ''
-    }
+  const result = await axios.post("http://localhost:8080/signup", personalData)
 
-    axios.post("http://localhost:8080/signup", personalData)
-        .then((response) => {
-            console.log(response.status);
-            console.log(response.data);
-            result.status = response.status;
-            result.text = response.data;
-
-        })
-        .catch(err => {
-            if (err.response) {
-                console.log(err.response.status)
-                console.log(err.response.data)
-                result.status = err.response.status;
-                result.text = err.response.data;
-            }
-        })
-
-    return result;
 
 }

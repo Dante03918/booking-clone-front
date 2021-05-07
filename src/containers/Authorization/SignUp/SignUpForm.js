@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styleClasses from '../FormStyle.module.css';
 import Input from '../../../components/UI/Input/Input';
-import { checkValidity } from "../../../utils/Validation/SignUpFormValidation/SignUpFormValidation";
-import { signUpRequest } from "../../../Api";
+import {checkValidity} from "../../../utils/Validation/SignUpFormValidation/SignUpFormValidation";
+import {signUpRequest} from "../../../Api";
+import axios from "axios";
 
 const SignUpForm = () => {
 
@@ -34,9 +35,25 @@ const SignUpForm = () => {
 
     });
     const [gender, setGender] = useState('');
+    const [formError, setFormError] = useState({hasError: false, errorText: '', errorStatus: ''});
+    const [submitted, setSubmitted] = useState(false);
 
 
+    useEffect(() => {
+      if(submitted){
 
+          const result = signUpFormSubmit()
+                .then(() => {
+
+              setFormError({...formError, errorStatus: result.status, errorText: "User created"});
+
+              console.log(result)
+            }).catch(err => setFormError({...formError, hasError: true, errorText: "User already exist"}));
+        }
+
+        setSubmitted(false);
+
+    }, [submitted])
 
     const inputChangeHandler = (event, type) => {
 
@@ -49,13 +66,13 @@ const SignUpForm = () => {
 
         formElement.isValid = returnedObject.isValid;
 
-        if(returnedObject.isValid){
+        if (returnedObject.isValid) {
             formElement.error = '';
         } else {
             formElement.error = returnedObject.error;
         }
 
-        setFormFields({...formFields, [type] : formElement});
+        setFormFields({...formFields, [type]: formElement});
 
     }
 
@@ -63,13 +80,14 @@ const SignUpForm = () => {
         setGender(event.target.value);
     }
 
-   const signUpFormSubmit = (event) => {
-        event.preventDefault();
-        const requestResult = signUpRequest({
-            personalData: formFields,
-            gender: gender
-        })
-   }
+    const signUpFormSubmit = () => {
+        return (
+            signUpRequest({
+                personalData: formFields,
+                gender: gender
+            })
+        )
+    }
     const formElementsArray = [];
 
     for (let key in formFields) {
@@ -79,32 +97,39 @@ const SignUpForm = () => {
         })
     }
 
+
     return (
-        <form className={styleClasses.Input} onSubmit={signUpFormSubmit}>
+        <form className={styleClasses.Input} onSubmit={(event) => {
+            event.preventDefault();
+            setSubmitted(true);
+            setFormError({...formError, hasError: null, errorText: ''})
+        }
+        }>
 
             {formElementsArray.map(formElement => {
-                return(
-                    <div key={formElement.id}>
-                        <Input
-                               placeHolder={formElement.config.placeHolder}
-                               value={formElement.config.value}
-                               changed={(event) => {
-                                   inputChangeHandler(event, formElement.id)
-                               }}
-                               isValid={formElement.config.isValid}/>
-                        <p>{formElement.config.error}</p>
-                    </div>
-                )
+                    return (
+                        <div key={formElement.id}>
+                            <Input
+                                placeHolder={formElement.config.placeHolder}
+                                value={formElement.config.value}
+                                changed={(event) => {
+                                    inputChangeHandler(event, formElement.id)
+                                }}
+                                isValid={formElement.config.isValid}/>
+                            <p>{formElement.config.error}</p>
+                        </div>
+                    )
                 }
             )}
-
-
-                <input type='radio' id='man' value='man' name='gender' onChange={radioButtonChangeHandler}/>
-                <label htmlFor='man'>Man</label>
-                <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
-                <label htmlFor='woman'>Woman</label>
+            <input type='radio' id='man' value='man' name='gender' onChange={radioButtonChangeHandler}/>
+            <label htmlFor='man'>Man</label>
+            <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
+            <label htmlFor='woman'>Woman</label>
 
             <button type='submit'>Submit</button>
+
+            {formError.errorText}
+
         </form>
     )
 }
