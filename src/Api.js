@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {useState} from "react";
 
 export const loginRequest = (props) => {
 
@@ -26,7 +25,6 @@ export const signUpRequest = async (props) => {
         gender: props.gender.value
     }
 
-  const result = await axios.post("http://localhost:8080/signup", personalData)
-
+ return  await axios.post("http://localhost:8080/signup", personalData)
 
 }

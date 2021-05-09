@@ -42,13 +42,16 @@ const SignUpForm = () => {
     useEffect(() => {
       if(submitted){
 
-          const result = signUpFormSubmit()
-                .then(() => {
+          signUpFormSubmit()
+                .then((response) => {
 
-              setFormError({...formError, errorStatus: result.status, errorText: "User created"});
+              setFormError({...formError, hasError: false,  errorText: response.data, errorStatus: response.status});
 
-              console.log(result)
-            }).catch(err => setFormError({...formError, hasError: true, errorText: "User already exist"}));
+              console.log(response)
+            }).catch((error) => {
+                setFormError({...formError, hasError: true, errorText:  error.response.data, errorStatus: error.response.status});
+                  console.log(error.response.data)
+              });
         }
 
         setSubmitted(false);
