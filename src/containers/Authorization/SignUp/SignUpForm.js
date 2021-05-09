@@ -25,6 +25,12 @@ const SignUpForm = () => {
             isValid: false,
             error: ''
         },
+        password: {
+            placeHolder: 'Your password',
+            value: '',
+            isValid: false,
+            error: ''
+        },
         age: {
             placeHolder: 'Your age',
             value: '',

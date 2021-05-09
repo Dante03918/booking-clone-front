@@ -21,5 +21,10 @@ export const checkValidity = (value, type) => {
         isValid = !isNaN(value) && value > 0 && value < 100;
         error = 'Age must be a number'
     }
+
+    if (type === 'password') {
+        isValid = value.length > 8;
+        error = 'Password should have more than 8 characters'
+    }
     return {isValid, error};
 }

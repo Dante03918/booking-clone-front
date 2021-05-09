@@ -22,6 +22,7 @@ export const signUpRequest = async (props) => {
         surname: props.personalData.surname.value,
         email: props.personalData.email.value,
         age: props.personalData.age.value,
+        password: props.personalData.password.value,
         gender: props.gender.value
     }
 
