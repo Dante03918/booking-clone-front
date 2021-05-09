@@ -9,7 +9,7 @@ const BookingClone = (props) => {
         <Fragment>
             <Navbar>
                 <NavigationItem link="/login" title="Sign In"/>
-                <NavigationItem link="/register" title="Sign Up"/>
+                <NavigationItem link="/signup" title="Sign Up"/>
             </Navbar>
             <main className={styleClasses.Content}>
                 {props.children}

@@ -3,7 +3,6 @@ import styleClasses from '../FormStyle.module.css';
 import Input from '../../../components/UI/Input/Input';
 import {checkValidity} from "../../../utils/Validation/SignUpFormValidation/SignUpFormValidation";
 import {signUpRequest} from "../../../Api";
-import axios from "axios";
 
 const SignUpForm = () => {
 
@@ -36,6 +35,7 @@ const SignUpForm = () => {
     });
     const [gender, setGender] = useState('');
     const [formError, setFormError] = useState({hasError: false, errorText: '', errorStatus: ''});
+    const [formIsValid, setFormIsValid] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
 
@@ -72,6 +72,13 @@ const SignUpForm = () => {
             formElement.error = returnedObject.error;
         }
 
+        let formIsValid = true;
+
+        for(let type in formElements){
+            formIsValid = formElements[type].isValid && formIsValid;
+        };
+
+        setFormIsValid(formIsValid);
         setFormFields({...formFields, [type]: formElement});
 
     }
@@ -126,9 +133,9 @@ const SignUpForm = () => {
             <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
             <label htmlFor='woman'>Woman</label>
 
-            <button type='submit'>Submit</button>
+            <button type='submit' disabled={!formIsValid}>Submit</button>
 
-            {formError.errorText}
+           <p className={styleClasses.CallbackMsg}>{formError.errorText}</p>
 
         </form>
     )
