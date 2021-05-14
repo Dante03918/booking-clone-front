@@ -50,16 +50,13 @@ const SignUpForm = () => {
 
           signUpFormSubmit()
                 .then((response) => {
-
               setFormError({...formError, hasError: false,  errorText: response.data, errorStatus: response.status});
 
-              console.log(response)
-            }).catch((error) => {
+                }).catch((error) => {
                 setFormError({...formError, hasError: true, errorText:  error.response.data, errorStatus: error.response.status});
                   console.log(error.response.data)
               });
         }
-
         setSubmitted(false);
 
     }, [submitted])
@@ -85,7 +82,7 @@ const SignUpForm = () => {
 
         for(let type in formElements){
             formIsValid = formElements[type].isValid && formIsValid;
-        };
+        }
 
         setFormIsValid(formIsValid);
         setFormFields({...formFields, [type]: formElement});
