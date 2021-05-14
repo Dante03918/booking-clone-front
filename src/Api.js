@@ -9,13 +9,17 @@ export const loginRequest = (props) => {
     }
     console.log(props.email + "----" + props.password)
     axios.post("http://localhost:8080/login", credentials)
-        .then(response => window.location.href = "/logged")
-        .catch(error => alert("Coś nie pykło"))
+
+        .then(response => {
+            window.location.href = "/logged";
+            localStorage.setItem('user', 'Bearer ' + response.data)
+        })
+
+        .catch(error => console.log(error.response.status))
 
 }
 
 export const signUpRequest = async (props) => {
-
 
     const personalData = {
         name: props.personalData.name.value,
@@ -26,6 +30,6 @@ export const signUpRequest = async (props) => {
         gender: props.gender.value
     }
 
- return  await axios.post("http://localhost:8080/signup", personalData)
+    return await axios.post("http://localhost:8080/signup", personalData)
 
 }
