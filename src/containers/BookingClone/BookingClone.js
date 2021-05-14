@@ -10,6 +10,7 @@ const BookingClone = (props) => {
             <Navbar>
                 <NavigationItem link="/login" title="Sign In"/>
                 <NavigationItem link="/signup" title="Sign Up"/>
+                <NavigationItem link="/loggedout" title="Log out"/>
             </Navbar>
             <main className={styleClasses.Content}>
                 {props.children}
