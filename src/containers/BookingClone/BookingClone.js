@@ -1,19 +1,20 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useEffect} from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import NavigationItem from "../../components/Navigation/NavigationItem";
 import styleClasses from './BookingClone.module.css';
+import Accommodation from "../Accommodation/Accommodation";
+import NavigationItemWrapper from "../../components/Navigation/NavigationItemWrapper";
 
 const BookingClone = (props) => {
 
     return (
         <Fragment>
             <Navbar>
-                <NavigationItem link="/login" title="Sign In"/>
-                <NavigationItem link="/signup" title="Sign Up"/>
-                <NavigationItem link="/loggedout" title="Log out"/>
+                <NavigationItemWrapper />
             </Navbar>
             <main className={styleClasses.Content}>
-                {props.children}
+                <Accommodation />
+
             </main>
         </Fragment>
 

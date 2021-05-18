@@ -6,6 +6,5 @@
     left: 0;
     background-color: blue;
     display: flex;
-    justify-content: center;
-
+    justify-content: flex-end;
 }

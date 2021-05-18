@@ -13,7 +13,7 @@ function App() {
         <Route path={"/signup"} component={SignUpForm}/>
         <Route path={"/login"} component={SignInForm}/>
         <Route path={"/logged"} component={Logged}/>
-        <Route path={"/loggedout"} component={LoggedOut}/>
+        <Route path={"/logout"} component={LoggedOut}/>
     </BookingClone>
   );
 }
