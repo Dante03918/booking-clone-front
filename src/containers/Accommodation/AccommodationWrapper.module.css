@@ -1,7 +1,7 @@
 .AccommodationWrapper {
     display: flex;
     border: 1px solid lightsteelblue;
-    margin: auto;
+    margin-bottom: 20px;
 }
 
 .ImageWrapper img {
