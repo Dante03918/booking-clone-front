@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const loginRequest = (props) => {
 
-
     const credentials = {
         email: props.email,
         password: props.password
@@ -33,3 +32,4 @@ export const signUpRequest = async (props) => {
     return await axios.post("http://localhost:8080/signup", personalData)
 
 }
+

@@ -1,8 +1,6 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import NavigationItem from "../../components/Navigation/NavigationItem";
 import styleClasses from './BookingClone.module.css';
-import Accommodation from "../Accommodation/Accommodation";
 import NavigationItemWrapper from "../../components/Navigation/NavigationItemWrapper";
 
 const BookingClone = (props) => {
@@ -13,8 +11,7 @@ const BookingClone = (props) => {
                 <NavigationItemWrapper />
             </Navbar>
             <main className={styleClasses.Content}>
-                <Accommodation />
-
+                {props.children}
             </main>
         </Fragment>
 

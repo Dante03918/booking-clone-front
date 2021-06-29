@@ -11,55 +11,64 @@ const Accommodation = () => {
 
 
     useEffect(() => {
-        getDummyDataFromFirebase();
+        getDataFromApi();
     }, [])
 
 
-    const getDummyDataFromFirebase = () => {
-        axios.get('https://bookingclone-de580-default-rtdb.europe-west1.firebasedatabase.app/details.json')
+    const getDataFromApi = () => {
+        axios.get('http://localhost:8080/')
+
             .then(response => {
-
-                const fetchedData = [];
+                let items = [];
                 for (let key in response.data) {
-                    fetchedData.push(response.data[key])
-                }
+                    items.push(response.data[key])
 
-                setAccommDeatils(fetchedData);
-                console.log(response.data)
+                }
+                setAccommDeatils(items);
+                console.log(Object.entries(response.data));
             })
 
 
     }
-    let hotelList = <div>
-        {accommDetails.map(accommodation => (
-            <div key={accommodation.id} className={styleClasses.AccommodationWrapper}>
-                <div className={styleClasses.ImageWrapper}>
-                    <img src={accommodation.imgPath} alt="Obrazek"></img>
-                </div>
-                <div className={styleClasses.DetailsWrapper}>
-                    <div className={styleClasses.DescriptionWrapper}>
-                        <div className={styleClasses.DescriptionTitle}>
-                            <h3>{accommodation.title}</h3>
-                        </div>
-                        <span>{accommodation.description}</span>
-                    </div>
-                    <div className={styleClasses.NavWithPriceWrapper}>
-                        <div className={'DateTimePicker'}>
-                            <DatePicker value={startDate} onChange={setStartDate}/>
-                            <DatePicker value={endDate} onChange={setEndDate}/>
 
+
+    let hotelList = <div>
+        {accommDetails.map((accommodation, i) => (
+            <div key={accommodation.id}>
+                {accommodation.accommodations.map(innerItem => (
+                <div key={accommodation.name}>
+                    <div className={styleClasses.AccommodationWrapper}>
+                        <div className={styleClasses.ImageWrapper}>
+                            <img src={innerItem.imageUrl} alt="Obrazek"></img>
                         </div>
-                        <div className={'Button'}>
-                            <button>Check availability</button>
-                        </div>
-                        <div className={'PriceWrapper'}>
-                            <p>{accommodation.price}</p>
+                        <div className={styleClasses.DetailsWrapper}>
+                            <div className={styleClasses.DescriptionWrapper}>
+                                <div className={styleClasses.DescriptionTitle}>
+                                    <h3>{innerItem.title}</h3>
+                                </div>
+                                <span>{innerItem.description}</span>
+                            </div>
+                            <div className={styleClasses.NavWithPriceWrapper}>
+                                <div className={'DateTimePicker'}>
+                                    <DatePicker value={startDate} onChange={setStartDate}/>
+                                    <DatePicker value={endDate} onChange={setEndDate}/>
+
+                                </div>
+                                <div className={'Button'}>
+                                    <button>Check availability</button>
+                                </div>
+                                <div className={'PriceWrapper'}>
+                                    <p>{innerItem.price}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                ))}
             </div>
         ))}
     </div>
+
 
     if (!accommDetails) {
         hotelList = <p>Loading...</p>
@@ -70,7 +79,6 @@ const Accommodation = () => {
         <div>
             {hotelList}
         </div>
-
     )
 }
 

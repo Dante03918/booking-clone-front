@@ -1,15 +1,34 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {Image} from 'cloudinary-react';
 import axios from "axios";
 
 const AddAccommodation = () => {
 
     const [files, setFiles] = useState('');
+    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
 
 
     const fileChangeHandler = (event) => {
         event.preventDefault();
         setFiles(event.target.files[0]);
+    }
+
+    const descriptionChangeHandler = (event) => {
+        event.preventDefault()
+        setDescription(event.target.value)
+    }
+
+    const titleChangeHandler = (event) => {
+        event.preventDefault()
+        setTitle(event.target.value)
+    }
+
+    const priceChangeHandler = (event) => {
+        event.preventDefault()
+        setPrice(event.target.value)
     }
 
     const addAccommodation = (event) => {
@@ -26,22 +45,41 @@ const AddAccommodation = () => {
         })
             .then(resp => resp.json())
             .then(data => {
-                // TO DO add post to backend endpoint
+
+                const details = {
+                    imageUrl: data.url,
+                    description: description,
+                    title: title,
+                    price: price
+                }
+
+                axios.post("http://localhost:8080/addAccommodation",
+                    details,
+                    {headers: {Authorization: localStorage.getItem('user')}})
+                    .then(response => console.log(response))
             })
             .catch(err => console.log(err))
 
     }
 
+    let view = <div>
+        <form onSubmit={addAccommodation}>
+            <input type="file" placeholder="Select image" onChange={fileChangeHandler}/>
+            <input type="text" placeholder="Description" onChange={descriptionChangeHandler}/>
+            <input type="text" placeholder="Title" onChange={titleChangeHandler}/>
+            <input type="text" placeholder="Price" onChange={priceChangeHandler}/>
+
+            <button type="submit">Dodaj</button>
+        </form>
+    </div>;
+
+    if (!localStorage.getItem("user")) {
+        view = <Redirect to="/login"/>
+    }
+
     return (
         <div>
-            <form onSubmit={addAccommodation}>
-                <input type="file" placeholder="Select image" onChange={fileChangeHandler}/>
-                <input type="text" placeholder="Description"/>
-                <input type="text" placeholder="Title"/>
-                <input type="text" placeholder="Price"/>
-
-                <button type="submit">Dodaj</button>
-            </form>
+            {view}
         </div>
 
     )
