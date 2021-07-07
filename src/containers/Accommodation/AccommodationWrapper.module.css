@@ -37,3 +37,17 @@
 .Button {
 
 }
+
+.EditingButtons {
+    display: flex;
+}
+
+.DeleteButton {
+    list-style-type: none;
+    color:red;
+    font-weight: bold;
+}
+
+.DeleteButton:hover {
+    cursor: pointer;
+}

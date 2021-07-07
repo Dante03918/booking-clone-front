@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+
+
+
 export const loginRequest = (props) => {
 
     const credentials = {
@@ -30,6 +33,15 @@ export const signUpRequest = async (props) => {
     }
 
     return await axios.post("http://localhost:8080/signup", personalData)
-
 }
+
+
+    export const deleteRequest = (email, id) => {
+
+        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+            .then(response => {
+                console.log(response.data);
+            })
+    }
+
 

@@ -1,27 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const LogOut = () => {
 
-    let message = <p>Wylogowano poprawnie</p>
+    const [isLogged, setIsLogged] = useState(true)
 
 
-    useEffect(() => {
-        if (localStorage.getItem('user')) {
-            try {
-                localStorage.removeItem('user');
-
-            } catch (Exception) {
-                console.log(Exception)
-                message = <p>Error occurred</p>
-            }
+    if(isLogged){
+        localStorage.removeItem('user')
+        return(
+            <p>Wylogowano</p>
+        )} else {
+            return(
+                <p>Blad</p>
+            )
         }
-    })
 
 
-    return (
-        <div>
-            {message}
-        </div>
-    )
+
 }
 export default LogOut;
