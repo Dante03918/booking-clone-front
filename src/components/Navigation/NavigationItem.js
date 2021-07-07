@@ -7,7 +7,10 @@ const NavigationItem = (props) => {
     return(
 
             <li className={styleClasses.NavigationItem}>
-                <NavLink to={props.link}>{props.title}</NavLink>
+                <NavLink to={{
+                    pathname: props.link,
+                    setLogged: props.setIsLogged
+                }}>{props.title}</NavLink>
             </li>
 
     )

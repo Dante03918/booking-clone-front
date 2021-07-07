@@ -7,7 +7,5 @@ const Navbar = (props) => {
             {props.children}
         </div>
         )
-
-
 }
 export default Navbar;

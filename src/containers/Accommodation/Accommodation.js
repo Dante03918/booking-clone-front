@@ -2,15 +2,13 @@ import React, {useState, useEffect} from 'react';
 import styleClasses from './AccommodationWrapper.module.css';
 import DatePicker from 'react-date-picker';
 import axios from 'axios';
-import  {deleteRequest} from '../../Api';
+import {deleteRequest} from '../../Api';
 
 const Accommodation = () => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [accommDetails, setAccommDeatils] = useState([]);
-    const [reload, setReload] = useState(false);
-
 
     useEffect(() => {
         getDataFromApi();
@@ -33,7 +31,7 @@ const Accommodation = () => {
 
     }
 
-    const deleteHandler = ( email, id) => {
+    const deleteHandler = (email, id) => {
         deleteRequest(email, id);
 
     }
@@ -52,7 +50,6 @@ const Accommodation = () => {
                                         onClick={() => deleteHandler(accommodation.email, innerItem.id)}>Delete</a></li>
                                 </ul>
                             </div> : null}
-
 
                             <div className={styleClasses.ImageWrapper}>
                                 <img src={innerItem.imageUrl} alt="Obrazek"></img>

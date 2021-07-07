@@ -6,7 +6,6 @@ const Logged = () => {
 
     const [message, setMessage] = useState('');
 
-
     const checkTokenValidity = (event) => {
         event.preventDefault();
         axios.get("http://localhost:8080/token", {headers: {Authorization: localStorage.getItem('user')}})

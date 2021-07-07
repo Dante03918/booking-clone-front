@@ -15,6 +15,7 @@ export const loginRequest = (props) => {
         .then(response => {
             window.location.href = "/logged";
             localStorage.setItem('user', 'Bearer ' + response.data)
+
         })
 
         .catch(error => console.log(error.response.status))

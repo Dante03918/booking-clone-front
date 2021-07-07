@@ -1,21 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useHistory, useLocation} from 'react-router-dom';
 
 const LogOut = () => {
 
-    const [isLogged, setIsLogged] = useState(true)
+    let history = useHistory();
 
+    let location = useLocation();
+    useEffect(() => {
+        localStorage.clear();
+        location.setLogged(false);
+        history.push('/')
 
-    if(isLogged){
-        localStorage.removeItem('user')
-        return(
-            <p>Wylogowano</p>
-        )} else {
-            return(
-                <p>Blad</p>
-            )
-        }
+    }, [])
 
-
-
+    return(
+        <div></div>
+    )
 }
+
+
 export default LogOut;
