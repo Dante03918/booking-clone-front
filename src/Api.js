@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-
-
-
 export const loginRequest = (props) => {
 
     const credentials = {
@@ -17,7 +14,6 @@ export const loginRequest = (props) => {
             localStorage.setItem('user', 'Bearer ' + response.data)
 
         })
-
         .catch(error => console.log(error.response.status))
 
 }
@@ -36,13 +32,12 @@ export const signUpRequest = async (props) => {
     return await axios.post("http://localhost:8080/signup", personalData)
 }
 
-
-    export const deleteRequest = (email, id) => {
-
-        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
-            .then(response => {
-                console.log(response.data);
-            })
-    }
+    // export const deleteRequest = (email, id) => {
+    //
+    //     axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+    //         .then(response => {
+    //             console.log(response.data);
+    //         })
+    // }
 
 

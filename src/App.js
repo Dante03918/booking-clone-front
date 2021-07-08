@@ -1,5 +1,6 @@
 import './App.css';
-import {Route} from 'react-router-dom';
+import { useState } from "react";
+import { Route } from 'react-router-dom';
 import BookingClone from './containers/BookingClone/BookingClone';
 import SignInForm from "./containers/Authorization/SingIn/SignInForm";
 import Logged from "./components/Logged";
@@ -9,9 +10,12 @@ import Accommodation from "./containers/Accommodation/Accommodation";
 import AddAccommodation from "./containers/Accommodation/AddAccommodation";
 
 function App() {
+
+  //  const [changed, setChanged] = useState(false);
+
   return (
     <BookingClone >
-        <Route path={"/"} exact component={Accommodation}/>
+        <Route path={"/"} exact component = {Accommodation}/>
         <Route path={"/signup"} component={SignUpForm}/>
         <Route path={"/login"} component={SignInForm}/>
         <Route path={"/logged"} component={Logged}/>

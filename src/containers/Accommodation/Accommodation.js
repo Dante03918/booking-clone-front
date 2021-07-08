@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import styleClasses from './AccommodationWrapper.module.css';
 import DatePicker from 'react-date-picker';
 import axios from 'axios';
-import {deleteRequest} from '../../Api';
 
 const Accommodation = () => {
 
+    const [changed, setChanged] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [accommDetails, setAccommDeatils] = useState([]);
@@ -13,7 +13,6 @@ const Accommodation = () => {
     useEffect(() => {
         getDataFromApi();
     }, [])
-
 
     const getDataFromApi = () => {
         axios.get('http://localhost:8080/')
@@ -27,13 +26,20 @@ const Accommodation = () => {
                 setAccommDeatils(items);
                 console.log(Object.entries(response.data));
             })
-
-
     }
 
     const deleteHandler = (email, id) => {
-        deleteRequest(email, id);
 
+        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+            .then(response => {
+                    console.log(response);
+                    const items = accommDetails.map(item => ({
+                        ...item, accommodations: item.accommodations
+                            .filter((acc) => acc.id !== id)
+                    }))
+                    setAccommDeatils(items)
+                }
+            )
     }
 
     let loggedUser = localStorage.getItem('user');
@@ -82,11 +88,9 @@ const Accommodation = () => {
         ))}
     </div>
 
-
     if (!accommDetails) {
         hotelList = <p>Loading...</p>
     }
-
 
     return (
         <div>
