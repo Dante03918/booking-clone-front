@@ -1,14 +1,16 @@
 import React, {useEffect, useState, useRef} from 'react';
-import styleClasses from '../FormStyle.module.css';
+// import styleClasses from '../FormStyle.module.css';
+import SignInFormStyles from './SignInFormStyles.module.css';
 import {loginRequest} from '../../../Api';
+import Backdrop from "../../../components/Backdrop/Backdrop";
 
 
-const SignInForm = () => {
+const SignInForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("null");
     const [submitted, setSubmitted] = useState(false);
-    const [emailInputStyles, setEmailInputStyles] = useState([styleClasses.InputElement]);
-    const [passwordInputStyles, setPasswordInputStyles] = useState([styleClasses.InputElement]);
+    const [emailInputStyles, setEmailInputStyles] = useState([SignInFormStyles.InputElement]);
+    const [passwordInputStyles, setPasswordInputStyles] = useState([SignInFormStyles.InputElement]);
     const [emailErrors, setEmailErrors] = useState('');
     const [passwordErrors, setPasswordErrors] = useState('');
 
@@ -39,14 +41,14 @@ const SignInForm = () => {
 
         if (!emailPattern.test(email)) {
             setEmailErrors("Email form is invalid");
-            emailInputStyles.push(styleClasses.Invalid);
+            emailInputStyles.push(SignInFormStyles.Invalid);
 
             conditions.emailIsValid = false;
 
         }
         if (email.length === 0) {
             setEmailErrors("Email is required");
-            emailInputStyles.push(styleClasses.Invalid);
+            emailInputStyles.push(SignInFormStyles.Invalid);
 
             conditions.emailIsValid = false;
 
@@ -54,21 +56,22 @@ const SignInForm = () => {
 
         if (!passPattern.test(password)) {
             setPasswordErrors("Password is too short");
-            passwordInputStyles.push(styleClasses.Invalid);
+            passwordInputStyles.push(SignInFormStyles.Invalid);
 
             conditions.passwordIsValid = false;
         }
         if (password.length === 0) {
             setPasswordErrors("Password must not be empty");
-            passwordInputStyles.push(styleClasses.Invalid);
+            passwordInputStyles.push(SignInFormStyles.Invalid);
 
             conditions.passwordIsValid = false;
         }
         if (conditions.emailIsValid && conditions.passwordIsValid) {
-            loginRequest({
+           loginRequest({
                 email: email,
                 password: password
             });
+           props.setUser(email);
         }
 
         setSubmitted(false);
@@ -77,8 +80,8 @@ const SignInForm = () => {
 
     const inputChangeHandler = (event, type) => {
 
-        setEmailInputStyles([styleClasses.InputElement]);
-        setPasswordInputStyles([styleClasses.InputElement]);
+        setEmailInputStyles([SignInFormStyles.InputElement]);
+        setPasswordInputStyles([SignInFormStyles.InputElement]);
         setEmailErrors('');
         setPasswordErrors('');
 
@@ -91,20 +94,26 @@ const SignInForm = () => {
     }
 
     return (
-        <form className={styleClasses.Input} onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
+        <div className={SignInFormStyles.Wrapper}>
+            <form className={SignInFormStyles.Input} onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(true);
 
-        }}>
-            <input className={emailInputStyles.join(' ')} type="text" placeholder="Enter email"
-                   onChange={(event) => (inputChangeHandler(event, "email"))}/>
-            <p>{emailErrors}</p>
-            <input className={passwordInputStyles.join(' ')} type="text" placeholder="Enter password"
-                   onChange={(event) => (inputChangeHandler(event, "pass"))}/>
-            <p>{passwordErrors}</p>
-            <button type="submit">Submit</button>
+            }}>
+                <div className={SignInFormStyles.Inputs}>
+                    <input className={emailInputStyles.join(' ')} type="text" placeholder="Enter email"
+                           onChange={(event) => (inputChangeHandler(event, "email"))}/>
+                    <p>{emailErrors}</p>
+                    <input className={passwordInputStyles.join(' ')} type="text" placeholder="Enter password"
+                           onChange={(event) => (inputChangeHandler(event, "pass"))}/>
+                    <p>{passwordErrors}</p>
+                </div>
 
-        </form>
+                <button className={SignInFormStyles.Button} type="submit">Submit</button>
+
+            </form>
+        </div>
+
     )
 
 }

@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const Accommodation = () => {
 
-    const [changed, setChanged] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+
     const [accommDetails, setAccommDeatils] = useState([]);
 
     useEffect(() => {
@@ -42,6 +42,18 @@ const Accommodation = () => {
             )
     }
 
+    const bookHandler = (accommodationId) => {
+
+        const data = {
+            startDate: startDate,
+            endDate: endDate,
+            accommodationId: accommodationId
+        }
+        axios.post("http://localhost:8080/book", data).then(response => {
+            console.log(response)
+        })
+    }
+
     let loggedUser = localStorage.getItem('user');
 
     let hotelList = <div>
@@ -50,35 +62,42 @@ const Accommodation = () => {
                 {accommodation.accommodations.map(innerItem => (
                     <div key={accommodation.name}>
                         <div className={styleClasses.AccommodationWrapper}>
-                            {loggedUser ? <div className={styleClasses.EditingButtons}>
-                                <ul>
-                                    <li className={styleClasses.DeleteButton}><a
-                                        onClick={() => deleteHandler(accommodation.email, innerItem.id)}>Delete</a></li>
-                                </ul>
-                            </div> : null}
+
+                            <div className={styleClasses.DescriptionTitle}>
+                                <h3>{innerItem.title}</h3>
+                                {loggedUser ? <div className={styleClasses.EditingButtons}>
+
+                                    <div className={styleClasses.DeleteButton}><a
+                                        onClick={() => deleteHandler(accommodation.email, innerItem.id)}>Delete</a>
+                                    </div>
+
+                                </div> : null}
+                            </div>
 
                             <div className={styleClasses.ImageWrapper}>
                                 <img src={innerItem.imageUrl} alt="Obrazek"></img>
                             </div>
                             <div className={styleClasses.DetailsWrapper}>
+
                                 <div className={styleClasses.DescriptionWrapper}>
-                                    <div className={styleClasses.DescriptionTitle}>
-                                        <h3>{innerItem.title}</h3>
-                                    </div>
+
                                     <span>{innerItem.description}</span>
+
                                 </div>
-                                <div className={styleClasses.NavWithPriceWrapper}>
+                                <div className={styleClasses.NavWrapper}>
                                     <div className={'DateTimePicker'}>
                                         <DatePicker value={startDate} onChange={setStartDate}/>
                                         <DatePicker value={endDate} onChange={setEndDate}/>
 
                                     </div>
                                     <div className={'Button'}>
-                                        <button>Check availability</button>
+                                        <button onClick={() => bookHandler(innerItem.id)}>Book</button>
                                     </div>
-                                    <div className={'PriceWrapper'}>
-                                        <p>{innerItem.price}</p>
-                                    </div>
+
+
+                                </div>
+                                <div className={styleClasses.PriceWrapper}>
+                                    <h3>{innerItem.price}zł</h3>
                                 </div>
                             </div>
                         </div>

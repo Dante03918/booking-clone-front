@@ -9,7 +9,7 @@ const classes = [styleClasses.InputElement];
         classes.push(styleClasses.Invalid)
     }
     return(
-        <div className={styleClasses.Input}>
+        <div>
             <input className={classes.join(' ')}
                    placeholder={props.placeHolder}
                    value={props.value}

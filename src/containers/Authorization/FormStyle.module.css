@@ -1,14 +1,27 @@
 .Input {
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
 
 }
 
-.Input button{
-    display: block;
-    margin: auto;
+
+.Button {
+    height: 70px;
+    width: 150px;
+    align-self: center;
+    background-color: white;
+    border: solid 2px blue;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    color: blue;
+    margin-top: 20px;
 }
+
 
 .CallbackMsg {
     display: block;
@@ -31,7 +44,7 @@
     font: inherit;
     padding: 6px 10px;
     display: block;
-    width: 100%;
+    width: 250px;
     box-sizing: border-box;
 }
 
@@ -44,4 +57,15 @@
 .Invalid {
     border: solid 3px red;
     color: red;
+}
+
+.RadioButtons {
+    display: flex;
+    flex-direction: row;
+}
+
+.SignUpWrapper {
+    display: flex;
+    border: 2px solid blue;
+    border-radius: 15px;
 }

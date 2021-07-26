@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useHistory, useLocation} from 'react-router-dom';
 
-const LogOut = () => {
+const LogOut = (props) => {
 
     let history = useHistory();
 
@@ -9,8 +9,8 @@ const LogOut = () => {
     useEffect(() => {
         localStorage.clear();
         location.setLogged(false);
-        history.push('/')
-
+        history.push('/');
+        props.setUser(null);
     }, [])
 
     return(

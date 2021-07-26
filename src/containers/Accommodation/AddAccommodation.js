@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
-import {Image} from 'cloudinary-react';
 import axios from "axios";
+import styleClasses from './AddAccommodation.module.css'
 
 const AddAccommodation = () => {
 
     const [files, setFiles] = useState('');
+    const [fileURL, setFileURL] = useState('');
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -13,7 +14,8 @@ const AddAccommodation = () => {
 
     const fileChangeHandler = (event) => {
         event.preventDefault();
-        setFiles(event.target.files[0]);
+        setFiles( event.target.files[0]);
+        setFileURL( URL.createObjectURL(event.target.files[0]));
     }
 
     const descriptionChangeHandler = (event) => {
@@ -63,10 +65,15 @@ const AddAccommodation = () => {
     }
 
     let view = <div>
-        <form onSubmit={addAccommodation}>
+        <form onSubmit={addAccommodation} className={styleClasses.addAccommodationWrapper}>
             <input type="file" placeholder="Select image" onChange={fileChangeHandler}/>
-            <input type="text" placeholder="Description" onChange={descriptionChangeHandler}/>
+            <div className={styleClasses.ImageWrapper}>
+                {
+                    files ? <img src={fileURL}></img> : null
+                }
+            </div>
             <input type="text" placeholder="Title" onChange={titleChangeHandler}/>
+            <textarea type="text" placeholder="Description" onChange={descriptionChangeHandler}/>
             <input type="text" placeholder="Price" onChange={priceChangeHandler}/>
 
             <button type="submit">Dodaj</button>

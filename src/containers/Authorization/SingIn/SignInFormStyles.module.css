@@ -1,0 +1,103 @@
+.Wrapper {
+    display: flex;
+    width: 400px;
+    margin: auto;
+    border: 2px solid blue;
+    border-radius: 15px;
+    height: 50vh;
+}
+
+.Input {
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+
+}
+
+.InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.InputElement:focus {
+    outline: none;
+    background-color: #ccc;
+
+}
+
+.Invalid {
+    border: solid 3px red;
+    color: red;
+}
+
+.Inputs {
+    width: 250px;
+    margin: auto;
+}
+
+.Button {
+    height: 70px;
+    width: 150px;
+    align-self: center;
+    background-color: white;
+    border: solid 2px blue;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    color: blue;
+    margin-bottom: 5%;
+}
+
+.Button:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .Wrapper {
+        display: flex;
+        width: 300px;
+        margin: auto;
+        justify-content: center;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1000px){
+    .Input {
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+
+    }
+    .Button {
+        height: 70px;
+        width: 75px;
+        align-self: center;
+        background-color: white;
+        border: solid 2px blue;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 15px;
+        color: blue;
+        margin-bottom: 5%;
+        margin-right: 4%;
+    }
+}

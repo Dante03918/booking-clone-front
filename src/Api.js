@@ -8,14 +8,10 @@ export const loginRequest = (props) => {
     }
     console.log(props.email + "----" + props.password)
     axios.post("http://localhost:8080/login", credentials)
-
         .then(response => {
-            window.location.href = "/logged";
             localStorage.setItem('user', 'Bearer ' + response.data)
-
         })
         .catch(error => console.log(error.response.status))
-
 }
 
 export const signUpRequest = async (props) => {

@@ -10,31 +10,31 @@ const SignUpForm = () => {
         name: {
             placeHolder: 'Your name',
             value: '',
-            isValid: false,
+            isValid: true,
             error: ''
         },
         surname: {
             placeHolder: 'Your surname',
             value: '',
-            isValid: false,
+            isValid: true,
             error: ''
         },
         email: {
             placeHolder: 'Your email',
             value: '',
-            isValid: false,
+            isValid: true,
             error: ''
         },
         password: {
             placeHolder: 'Your password',
             value: '',
-            isValid: false,
+            isValid: true,
             error: ''
         },
         age: {
             placeHolder: 'Your age',
             value: '',
-            isValid: false,
+            isValid: true,
             error: ''
         },
 
@@ -112,38 +112,44 @@ const SignUpForm = () => {
 
 
     return (
-        <form className={styleClasses.Input} onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
-            setFormError({...formError, hasError: null, errorText: ''})
-        }
-        }>
+        <div className={styleClasses.SignUpWrapper}>
+            <form className={styleClasses.Input} onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(true);
+                setFormError({...formError, hasError: null, errorText: ''})
+            }
+            }>
 
-            {formElementsArray.map(formElement => {
-                    return (
-                        <div key={formElement.id}>
-                            <Input
-                                placeHolder={formElement.config.placeHolder}
-                                value={formElement.config.value}
-                                changed={(event) => {
-                                    inputChangeHandler(event, formElement.id)
-                                }}
-                                isValid={formElement.config.isValid}/>
-                            <p>{formElement.config.error}</p>
-                        </div>
-                    )
-                }
-            )}
-            <input type='radio' id='man' value='man' name='gender' onChange={radioButtonChangeHandler}/>
-            <label htmlFor='man'>Man</label>
-            <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
-            <label htmlFor='woman'>Woman</label>
+                {formElementsArray.map(formElement => {
+                        return (
+                            <div key={formElement.id}>
+                                <Input
+                                    placeHolder={formElement.config.placeHolder}
+                                    value={formElement.config.value}
+                                    changed={(event) => {
+                                        inputChangeHandler(event, formElement.id)
+                                    }}
+                                    isValid={formElement.config.isValid}/>
+                                <p>{formElement.config.error}</p>
+                            </div>
+                        )
+                    }
+                )}
+                <div className={styleClasses.RadioButtons}>
+                    <input type='radio' id='man' value='man' name='gender' onChange={radioButtonChangeHandler}/>
+                    <label htmlFor='man'>Man</label>
+                    <input type='radio' id='woman' value='woman' name='gender' onChange={radioButtonChangeHandler}/>
+                    <label htmlFor='woman'>Woman</label>
+                </div>
 
-            <button type='submit' disabled={!formIsValid}>Submit</button>
 
-           <p className={styleClasses.CallbackMsg}>{formError.errorText}</p>
+                <button className={styleClasses.Button} type='submit' disabled={!formIsValid}>Submit</button>
 
-        </form>
+                <p className={styleClasses.CallbackMsg}>{formError.errorText}</p>
+
+            </form>
+        </div>
+
     )
 }
 export default SignUpForm;

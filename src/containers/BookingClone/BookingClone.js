@@ -7,7 +7,7 @@ const BookingClone = (props) => {
 
     return (
         <Fragment>
-            <Navbar>
+            <Navbar loggedUser={props.loggedUser}>
                 <NavigationItemWrapper />
             </Navbar>
             <main className={styleClasses.Content}>

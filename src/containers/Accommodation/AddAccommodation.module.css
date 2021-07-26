@@ -1,0 +1,23 @@
+.addAccommodationWrapper {
+    padding: 10px;
+    border: 2px solid blue;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.addAccommodationWrapper textarea{
+    font: inherit;
+}
+
+
+.ImageWrapper {
+    width: 250px;
+    height: auto;
+    margin: 10px auto;
+}
+
+.ImageWrapper img {
+    width: 100%;
+}

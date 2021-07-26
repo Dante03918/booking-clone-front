@@ -1,53 +1,153 @@
-.AccommodationWrapper {
-    display: flex;
-    border: 1px solid lightsteelblue;
-    margin-bottom: 20px;
+@media (max-width: 600px) {
+    .AccommodationWrapper {
+        flex-direction: column;
+        flex-basis: 100%;
+        display: flex;
+        padding: 10px;
+        border: 2px solid blue;
+        border-radius: 30px;
+
+    }
+
+    .ImageWrapper {
+        width: 80%;
+        margin: auto;
+    }
+    .ImageWrapper img {
+
+        width: 100%;
+        height: auto;
+    }
+
+    .DescriptionWrapper{
+        display: flex;
+        justify-content: center;
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .DescriptionTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .DescriptionTitle h3{
+        display: flex;
+        justify-content: center;
+        flex-basis: 80%;
+        text-align: center;
+    }
+    .DetailsWrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .NavWrapper{
+        display: flex;
+        flex-basis: 100%;
+        justify-content: space-between;
+        margin: 10px 20px 0 20px;
+
+    }
+
+    .PriceWrapper {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+
+    .Button {
+
+    }
+
+    .EditingButtons {
+        display: flex;
+
+    }
+
+    .DeleteButton {
+        list-style-type: none;
+        color:red;
+        font-weight: bold;
+    }
+
+    .DeleteButton:hover {
+        cursor: pointer;
+    }
 }
 
-.ImageWrapper img {
-    width: 300px;
-    height: auto;
-}
+@media (min-width: 601px) {
+    .AccommodationWrapper {
+        flex-direction: column;
+        display: flex;
+        padding: 10px;
+        border: 2px solid blue;
+        border-radius: 30px;
+        margin: 0 18%;
 
-.DescriptionWrapper{
-    padding: 10px;
-}
-.DescriptionTitle {
-    display: flex;
-    justify-content: center;
-}
-.DetailsWrapper{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
+    }
 
-.NavWithPriceWrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    margin-top:  120px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 95%;
-}
+    .ImageWrapper {
+        width: 80%;
+        margin: auto;
+    }
+    .ImageWrapper img {
 
-.Button {
+        width: 100%;
+        height: auto;
+    }
 
-}
+    .DescriptionWrapper{
+        display: flex;
+        justify-content: center;
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .DescriptionTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .DescriptionTitle h3{
+        display: flex;
+        justify-content: center;
+        flex-basis: 80%;
+        text-align: center;
+    }
+    .DetailsWrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-.EditingButtons {
-    display: flex;
-}
+    .NavWrapper{
+        display: flex;
+        flex-basis: 100%;
+        justify-content: space-between;
+        margin: 10px 20px 0 20px;
 
-.DeleteButton {
-    list-style-type: none;
-    color:red;
-    font-weight: bold;
-}
+    }
 
-.DeleteButton:hover {
-    cursor: pointer;
+    .PriceWrapper {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+
+    .Button {
+
+    }
+
+    .EditingButtons {
+        display: flex;
+
+    }
+
+    .DeleteButton {
+        list-style-type: none;
+        color:red;
+        font-weight: bold;
+    }
+
+    .DeleteButton:hover {
+        cursor: pointer;
+    }
 }
