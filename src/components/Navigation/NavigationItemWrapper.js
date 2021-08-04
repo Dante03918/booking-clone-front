@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import NavigationItem from "./NavigationItem";
 import styleClasses from './NavigationItem.module.css';
 
-const NavigationItemWrapper = () => {
+const NavigationItemWrapper = (props) => {
 
-    const [isLogged, setIsLogged] = useState(true);
 
     return (
 
         <ul className={styleClasses.NavigationItems}>
             <NavigationItem link="/login" title="Sign In"/>
             <NavigationItem link="/signup" title="Sign Up"/>
-            {isLogged ? <NavigationItem setIsLogged={setIsLogged} link="/logout" title="Log Out"/> : null}
+            {props.loggedUser ? <NavigationItem setUser={props.setUser} link="/logout" title="Log Out"/> : null}
+            {props.loggedUser ? <NavigationItem link="/add" title="Add ad"/> : null}
         </ul>
     )
 }

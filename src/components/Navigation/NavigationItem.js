@@ -9,7 +9,7 @@ const NavigationItem = (props) => {
             <li className={styleClasses.NavigationItem}>
                 <NavLink to={{
                     pathname: props.link,
-                    setLogged: props.setIsLogged
+                    setLogged: props.setUser
                 }}>{props.title}</NavLink>
             </li>
 

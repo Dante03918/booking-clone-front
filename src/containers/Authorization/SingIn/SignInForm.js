@@ -1,9 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
-// import styleClasses from '../FormStyle.module.css';
 import SignInFormStyles from './SignInFormStyles.module.css';
 import {loginRequest} from '../../../Api';
-import Backdrop from "../../../components/Backdrop/Backdrop";
-
+import { withRouter } from 'react-router-dom';
 
 const SignInForm = (props) => {
     const [email, setEmail] = useState("");
@@ -71,7 +69,11 @@ const SignInForm = (props) => {
                 email: email,
                 password: password
             });
-           props.setUser(email);
+           if(localStorage.getItem('user')){
+               props.setUser(email);
+               props.history.push('/');
+           }
+
         }
 
         setSubmitted(false);
@@ -96,6 +98,7 @@ const SignInForm = (props) => {
     return (
         <div className={SignInFormStyles.Wrapper}>
             <form className={SignInFormStyles.Input} onSubmit={(event) => {
+                props.setUser(true);
                 event.preventDefault();
                 setSubmitted(true);
 
@@ -117,5 +120,5 @@ const SignInForm = (props) => {
     )
 
 }
-export default SignInForm;
+export default withRouter(SignInForm);
 

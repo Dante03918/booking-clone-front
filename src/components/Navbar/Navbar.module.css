@@ -6,9 +6,16 @@
     left: 0;
     background-color: blue;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .Username {
 
 }
+

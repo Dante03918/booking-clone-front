@@ -10,10 +10,10 @@ import AddAccommodation from "./containers/Accommodation/AddAccommodation";
 
 function App() {
 
-   const [loggedUser, setLoggedUser] = useState('');
+   const [loggedUser, setLoggedUser] = useState(false);
 
   return (
-    <BookingClone loggedUser={loggedUser}>
+    <BookingClone loggedUser={loggedUser} setUser = {setLoggedUser}>
         <Route path={"/"} exact component = {Accommodation}/>
         <Route path={"/signup"} component={SignUpForm}/>
         <Route path={"/login"} ><SignInForm setUser = {setLoggedUser} /></Route>
