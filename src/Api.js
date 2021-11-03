@@ -7,7 +7,7 @@ export const loginRequest = (props) => {
         password: props.password
     }
     console.log(props.email + "----" + props.password)
-    axios.post("http://localhost:8080/login", credentials)
+    return axios.post("http://localhost:8080/login", credentials)
         .then(response => {
             localStorage.setItem('user', 'Bearer ' + response.data)
         })

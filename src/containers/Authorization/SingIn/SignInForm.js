@@ -68,10 +68,12 @@ const SignInForm = (props) => {
            loginRequest({
                 email: email,
                 password: password
-            });
-           if(localStorage.getItem('user')){
+            }).then(() => {
                props.setUser(email);
                props.history.push('/');
+           })
+           if(localStorage.getItem('user')){
+
            }
 
         }
