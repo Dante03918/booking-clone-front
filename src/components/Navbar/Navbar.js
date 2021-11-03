@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styleClasses from './Navbar.module.css';
 import Logo from "../Logo/Logo";
+import HamburgerMenu from "../Navigation/HamburgerMenu/HamburgerMenu";
 
 const Navbar = (props) => {
     return(
@@ -13,6 +14,9 @@ const Navbar = (props) => {
                     }
                 </div>
                 {props.children}
+            </div>
+            <div className={styleClasses.Hamburger}>
+                <HamburgerMenu loggedUser={props.loggedUser}/>
             </div>
 
         </div>
