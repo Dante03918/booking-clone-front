@@ -1,0 +1,75 @@
+.Input {
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+
+.Button {
+    height: 70px;
+    width: 150px;
+    align-self: center;
+    background-color: white;
+    border: solid 2px blue;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    color: blue;
+    margin-top: 20px;
+}
+
+.Button:hover {
+    cursor: pointer;
+}
+
+
+.CallbackMsg {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+
+}
+
+.InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 250px;
+    box-sizing: border-box;
+}
+
+.InputElement:focus {
+    outline: none;
+    background-color: #ccc;
+
+}
+
+.Invalid {
+    border: solid 3px red;
+    color: red;
+}
+
+.RadioButtons {
+    display: flex;
+    flex-direction: row;
+}
+
+.SignUpWrapper {
+    display: flex;
+    border: 2px solid blue;
+    border-radius: 15px;
+}

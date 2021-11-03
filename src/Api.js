@@ -1,14 +1,39 @@
-import React from 'react';
 import axios from 'axios';
 
-const postRequest = (props) => {
+export const loginRequest = (props) => {
 
     const credentials = {
         email: props.email,
         password: props.password
     }
-    console.log("Request " + credentials.email + "  " + credentials.password)
-    // axios.post("http://localhost:8080/login", credentials)
-    //     .then(() => props.history.push("/"))
+    console.log(props.email + "----" + props.password)
+    return axios.post("http://localhost:8080/login", credentials)
+        .then(response => {
+            localStorage.setItem('user', 'Bearer ' + response.data)
+        })
+        .catch(error => console.log(error.response.status))
 }
-export default postRequest;
+
+export const signUpRequest = async (props) => {
+
+    const personalData = {
+        name: props.personalData.name.value,
+        surname: props.personalData.surname.value,
+        email: props.personalData.email.value,
+        age: props.personalData.age.value,
+        password: props.personalData.password.value,
+        gender: props.gender.value
+    }
+
+    return await axios.post("http://localhost:8080/signup", personalData)
+}
+
+    // export const deleteRequest = (email, id) => {
+    //
+    //     axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+    //         .then(response => {
+    //             console.log(response.data);
+    //         })
+    // }
+
+

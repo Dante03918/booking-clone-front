@@ -1,13 +1,21 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styleClasses from './Navbar.module.css';
+import Logo from "../Logo/Logo";
 
 const Navbar = (props) => {
     return(
         <div className={styleClasses.Navbar}>
-            {props.children}
+            <Logo />
+            <div className={styleClasses.Wrapper}>
+                <div className={styleClasses.Username}>
+                    {props.loggedUser ? <p>Zalogowany użytkownik: {props.loggedUser}</p> : null
+                    }
+                </div>
+                {props.children}
+            </div>
+
         </div>
         )
-
-
 }
-export default Navbar;
+export default withRouter(Navbar);

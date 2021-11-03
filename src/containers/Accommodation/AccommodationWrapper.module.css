@@ -1,0 +1,153 @@
+@media (max-width: 600px) {
+    .AccommodationWrapper {
+        flex-direction: column;
+        flex-basis: 100%;
+        display: flex;
+        padding: 10px;
+        border: 2px solid blue;
+        border-radius: 30px;
+
+    }
+
+    .ImageWrapper {
+        width: 80%;
+        margin: auto;
+    }
+    .ImageWrapper img {
+
+        width: 100%;
+        height: auto;
+    }
+
+    .DescriptionWrapper{
+        display: flex;
+        justify-content: center;
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .DescriptionTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .DescriptionTitle h3{
+        display: flex;
+        justify-content: center;
+        flex-basis: 80%;
+        text-align: center;
+    }
+    .DetailsWrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .NavWrapper{
+        display: flex;
+        flex-basis: 100%;
+        justify-content: space-between;
+        margin: 10px 20px 0 20px;
+
+    }
+
+    .PriceWrapper {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+
+    .Button {
+
+    }
+
+    .EditingButtons {
+        display: flex;
+
+    }
+
+    .DeleteButton {
+        list-style-type: none;
+        color:red;
+        font-weight: bold;
+    }
+
+    .DeleteButton:hover {
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 601px) {
+    .AccommodationWrapper {
+        flex-direction: column;
+        display: flex;
+        padding: 10px;
+        border: 2px solid blue;
+        border-radius: 30px;
+        margin: 0 18%;
+
+    }
+
+    .ImageWrapper {
+        width: 80%;
+        margin: auto;
+    }
+    .ImageWrapper img {
+
+        width: 100%;
+        height: auto;
+    }
+
+    .DescriptionWrapper{
+        display: flex;
+        justify-content: center;
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .DescriptionTitle {
+        display: flex;
+        justify-content: center;
+    }
+    .DescriptionTitle h3{
+        display: flex;
+        justify-content: center;
+        flex-basis: 80%;
+        text-align: center;
+    }
+    .DetailsWrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .NavWrapper{
+        display: flex;
+        flex-basis: 100%;
+        justify-content: space-between;
+        margin: 10px 20px 0 20px;
+
+    }
+
+    .PriceWrapper {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+
+    .Button {
+
+    }
+
+    .EditingButtons {
+        display: flex;
+
+    }
+
+    .DeleteButton {
+        list-style-type: none;
+        color:red;
+        font-weight: bold;
+    }
+
+    .DeleteButton:hover {
+        cursor: pointer;
+    }
+}
