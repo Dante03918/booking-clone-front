@@ -7,6 +7,7 @@ import SignUpForm from "./containers/Authorization/SignUp/SignUpForm";
 import LogOut from './components/LogOut';
 import Accommodation from "./containers/Accommodation/Accommodation";
 import AddAccommodation from "./containers/Accommodation/AddAccommodation";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

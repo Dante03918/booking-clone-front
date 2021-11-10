@@ -1,11 +1,3 @@
-.addAccommodationWrapper {
-    padding: 10px;
-    border: 2px solid blue;
-    border-radius: 30px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
 
 .addAccommodationWrapper textarea{
     font: inherit;
@@ -13,11 +5,38 @@
 
 
 .ImageWrapper {
-    width: 250px;
+    width: 220px;
     height: auto;
     margin: 10px auto;
 }
 
 .ImageWrapper img {
     width: 100%;
+}
+
+.addAccommodationWrapper {
+    display: flex;
+    width: 400px;
+    margin: auto;
+    border: 2px solid blue;
+    border-radius: 15px;
+    height: 60vh;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
+
+}
+
+@media (max-width: 600px) {
+    .addAccommodationWrapper {
+        display: flex;
+        width: 300px;
+        margin: auto;
+        border: 2px solid blue;
+        border-radius: 15px;
+        height: auto;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 20px;
+    }
 }

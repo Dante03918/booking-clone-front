@@ -8,16 +8,19 @@ const Navbar = (props) => {
     return(
         <div className={styleClasses.Navbar}>
             <Logo />
+
             <div className={styleClasses.Wrapper}>
                 <div className={styleClasses.Username}>
                     {props.loggedUser ? <p>Zalogowany użytkownik: {props.loggedUser}</p> : null
                     }
                 </div>
                 {props.children}
+
             </div>
             <div className={styleClasses.Hamburger}>
                 <HamburgerMenu loggedUser={props.loggedUser}/>
             </div>
+
 
         </div>
         )
