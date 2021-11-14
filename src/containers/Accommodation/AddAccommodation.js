@@ -4,8 +4,9 @@ import axios from "axios";
 import styleClasses from './AddAccommodation.module.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { withRouter } from 'react-router-dom';
 
-const AddAccommodation = () => {
+const AddAccommodation = (props) => {
 
     const [files, setFiles] = useState('');
     const [fileURL, setFileURL] = useState('');
@@ -60,7 +61,8 @@ const AddAccommodation = () => {
                 axios.post("http://localhost:8080/addAccommodation",
                     details,
                     {headers: {Authorization: localStorage.getItem('user')}})
-                    .then(response => console.log(response))
+                    .then(response => {console.log(response)
+                    props.history.push("/")})
             })
             .catch(err => console.log(err))
 
@@ -104,4 +106,4 @@ const AddAccommodation = () => {
 
 
 }
-export default AddAccommodation;
+export default withRouter(AddAccommodation);
