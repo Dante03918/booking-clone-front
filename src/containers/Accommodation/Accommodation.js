@@ -3,13 +3,14 @@ import styleClasses from './AccommodationWrapper.module.css';
 import DatePicker from 'react-date-picker';
 import axios from 'axios';
 import Button from "react-bootstrap/Button";
-import Backdrop from '../../components/Backdrop/Backdrop';
+import VerticallyCenteredModal from "../../components/Modal";
 
 const Accommodation = () => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [showBackdrop, setShowBackdrop] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
 
     const [accommDetails, setAccommDeatils] = useState([]);
 
@@ -55,6 +56,7 @@ const Accommodation = () => {
         axios.post("http://localhost:8080/book", data).then(response => {
 
             console.log(response)
+            setResponseMessage(response.data);
             setShowBackdrop(true);
         })
 
@@ -117,7 +119,7 @@ const Accommodation = () => {
             </div>
         ))}
 
-        <Backdrop show={showBackdrop} hideBackdrop={()=>hideBackdrop()} />
+        <VerticallyCenteredModal show={showBackdrop} onHide={()=>hideBackdrop()} message={responseMessage}/>
 
     </div>
 
