@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from "axios";
 import styleClasses from './AddAccommodation.module.css'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { withRouter } from 'react-router-dom';
 
-const AddAccommodation = () => {
+const AddAccommodation = (props) => {
 
     const [files, setFiles] = useState('');
     const [fileURL, setFileURL] = useState('');
@@ -58,7 +61,8 @@ const AddAccommodation = () => {
                 axios.post("http://localhost:8080/addAccommodation",
                     details,
                     {headers: {Authorization: localStorage.getItem('user')}})
-                    .then(response => console.log(response))
+                    .then(response => {console.log(response)
+                    props.history.push("/")})
             })
             .catch(err => console.log(err))
 
@@ -66,17 +70,26 @@ const AddAccommodation = () => {
 
     let view = <div>
         <form onSubmit={addAccommodation} className={styleClasses.addAccommodationWrapper}>
-            <input type="file" placeholder="Select image" onChange={fileChangeHandler}/>
+
+            <Form.Group controlId="formFile" className="mb-3">
+                <Form.Control onChange={fileChangeHandler} type="file" />
+            </Form.Group>
             <div className={styleClasses.ImageWrapper}>
                 {
                     files ? <img src={fileURL}></img> : null
                 }
             </div>
-            <input type="text" placeholder="Title" onChange={titleChangeHandler}/>
-            <textarea type="text" placeholder="Description" onChange={descriptionChangeHandler}/>
-            <input type="text" placeholder="Price" onChange={priceChangeHandler}/>
+            <Form.Group className="mb-3" controlId="formGridAddress1">
+                <Form.Control onChange={titleChangeHandler} placeholder="Title" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Control onChange={descriptionChangeHandler} as="textarea" rows={3} placeholder="Description" />
+            </Form.Group>
 
-            <button type="submit">Dodaj</button>
+            <Form.Group className="mb-3" controlId="formGridAddress1">
+                <Form.Control onChange={priceChangeHandler} placeholder="Price" />
+            </Form.Group>
+            <Button type='submit' variant="primary">Dodaj</Button>
         </form>
     </div>;
 
@@ -93,4 +106,4 @@ const AddAccommodation = () => {
 
 
 }
-export default AddAccommodation;
+export default withRouter(AddAccommodation);

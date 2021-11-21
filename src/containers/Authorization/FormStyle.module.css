@@ -66,10 +66,24 @@
 .RadioButtons {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .SignUpWrapper {
     display: flex;
+    width: 400px;
+    margin: auto;
     border: 2px solid blue;
     border-radius: 15px;
+    height: 60vh;
+
+}
+
+@media (max-width: 600px) {
+    .SignUpWrapper {
+        display: flex;
+        width: 300px;
+        margin: auto;
+        justify-content: center;
+    }
 }

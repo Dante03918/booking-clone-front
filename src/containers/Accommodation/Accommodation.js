@@ -2,11 +2,15 @@ import React, {useState, useEffect} from 'react';
 import styleClasses from './AccommodationWrapper.module.css';
 import DatePicker from 'react-date-picker';
 import axios from 'axios';
+import Button from "react-bootstrap/Button";
+import VerticallyCenteredModal from "../../components/Modal";
 
 const Accommodation = () => {
 
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [showBackdrop, setShowBackdrop] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
 
     const [accommDetails, setAccommDeatils] = useState([]);
 
@@ -30,7 +34,12 @@ const Accommodation = () => {
 
     const deleteHandler = (email, id) => {
 
-        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id,
+            {
+                headers: {
+                    Authorization: localStorage.getItem('user')
+                }
+            })
             .then(response => {
                     console.log(response);
                     const items = accommDetails.map(item => ({
@@ -50,8 +59,17 @@ const Accommodation = () => {
             accommodationId: accommodationId
         }
         axios.post("http://localhost:8080/book", data).then(response => {
+
             console.log(response)
+            setResponseMessage(response.data);
+            setShowBackdrop(true);
         })
+
+
+    }
+
+    const hideBackdrop = () => {
+        setShowBackdrop(false);
     }
 
     let loggedUser = localStorage.getItem('user');
@@ -85,13 +103,14 @@ const Accommodation = () => {
 
                                 </div>
                                 <div className={styleClasses.NavWrapper}>
-                                    <div className={'DateTimePicker'}>
+                                    <div style={{zIndex: -10}} className={'DateTimePicker'}>
                                         <DatePicker value={startDate} onChange={setStartDate}/>
                                         <DatePicker value={endDate} onChange={setEndDate}/>
 
                                     </div>
                                     <div className={'Button'}>
-                                        <button onClick={() => bookHandler(innerItem.id)}>Book</button>
+                                        <Button onClick={() => bookHandler(innerItem.id)}
+                                                variant="primary">Book</Button>
                                     </div>
 
 
@@ -105,6 +124,9 @@ const Accommodation = () => {
                 ))}
             </div>
         ))}
+
+        <VerticallyCenteredModal show={showBackdrop} onHide={() => hideBackdrop()} message={responseMessage}/>
+
     </div>
 
     if (!accommDetails) {

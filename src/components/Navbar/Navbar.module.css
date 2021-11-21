@@ -21,6 +21,7 @@
 
 
 
+
 @media(min-width: 500px){
     .Hamburger {
         display: none;
@@ -29,6 +30,9 @@
 @media(max-width: 500px){
     .Wrapper {
         display: none;
+    }
+    .Hamburger {
+        display: flex;
     }
     .Navbar{
         width: 100%;
