@@ -34,7 +34,12 @@ const Accommodation = () => {
 
     const deleteHandler = (email, id) => {
 
-        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id)
+        axios.delete('http://localhost:8080/removeAccommodation?email=' + email + "&id=" + id,
+            {
+                headers: {
+                    Authorization: localStorage.getItem('user')
+                }
+            })
             .then(response => {
                     console.log(response);
                     const items = accommDetails.map(item => ({
@@ -98,13 +103,14 @@ const Accommodation = () => {
 
                                 </div>
                                 <div className={styleClasses.NavWrapper}>
-                                    <div className={'DateTimePicker'}>
+                                    <div style={{zIndex: -10}} className={'DateTimePicker'}>
                                         <DatePicker value={startDate} onChange={setStartDate}/>
                                         <DatePicker value={endDate} onChange={setEndDate}/>
 
                                     </div>
                                     <div className={'Button'}>
-                                        <Button onClick={() => bookHandler(innerItem.id)} variant="primary">Book</Button>
+                                        <Button onClick={() => bookHandler(innerItem.id)}
+                                                variant="primary">Book</Button>
                                     </div>
 
 
@@ -119,7 +125,7 @@ const Accommodation = () => {
             </div>
         ))}
 
-        <VerticallyCenteredModal show={showBackdrop} onHide={()=>hideBackdrop()} message={responseMessage}/>
+        <VerticallyCenteredModal show={showBackdrop} onHide={() => hideBackdrop()} message={responseMessage}/>
 
     </div>
 
