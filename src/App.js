@@ -12,10 +12,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
    const [loggedUser, setLoggedUser] = useState(false);
+    const [accommDetails, setAccommDeatils] = useState([]);
 
   return (
-    <BookingClone loggedUser={loggedUser} setUser = {setLoggedUser}>
-        <Route path={"/"} exact component = {Accommodation}/>
+    <BookingClone loggedUser={loggedUser}
+                  setUser = {setLoggedUser}
+                  accommDetails={accommDetails}
+                  setAccommDetails={setAccommDeatils}>
+        <Route path={"/"} exact> <Accommodation accommDetails={accommDetails} setAccommDetails={setAccommDeatils}/></Route>
         <Route path={"/signup"} component={SignUpForm}/>
         <Route path={"/login"} ><SignInForm setUser = {setLoggedUser} /></Route>
         <Route path={"/logout"}><LogOut setUser = {setLoggedUser}/></Route>

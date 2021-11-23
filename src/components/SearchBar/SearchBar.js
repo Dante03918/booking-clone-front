@@ -1,17 +1,30 @@
+import React, {useEffect} from "react";
 import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import Fragment from 'react-router-dom';
+import Button from '../UI/Button/Button';
+import styleClasses from './SearchBar.module.css';
+import {searchRequest} from "../../Api";
 
-const SearchBar = () => (
-    <Fragment>
-        <FormControl
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-    </Fragment>
+function SearchBar(props)  {
 
-)
+    const inputChangeHandler = (event) => {
+
+       //  searchRequest({keyword: event.target.value})
+       //      .then((response) =>)
+       // console.log() ;
+    }
+    return(
+       <div className={styleClasses.SearchBar}>
+            <FormControl
+                style={{width: 250}}
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+                onChange={(event) => (inputChangeHandler(event))}
+            />
+            <Button>Search</Button>
+        </div>
+    )
+
+}
 export default SearchBar;

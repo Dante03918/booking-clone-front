@@ -5,14 +5,14 @@ import axios from 'axios';
 import Button from "react-bootstrap/Button";
 import VerticallyCenteredModal from "../../components/Modal";
 
-const Accommodation = () => {
+const Accommodation = (props) => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [showBackdrop, setShowBackdrop] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
 
-    const [accommDetails, setAccommDeatils] = useState([]);
+    // const [accommDetails, setAccommDeatils] = useState([]);
 
     useEffect(() => {
         getDataFromApi();
@@ -27,9 +27,13 @@ const Accommodation = () => {
                     items.push(response.data[key])
                     console.log(response.data[key])
                 }
-                setAccommDeatils(items);
+                // setAccommDeatils(items);
                 console.log(Object.entries(response.data));
+
+                props.setAccommDetails(items);
+
             })
+
     }
 
     const deleteHandler = (email, id) => {
@@ -42,11 +46,12 @@ const Accommodation = () => {
             })
             .then(response => {
                     console.log(response);
-                    const items = accommDetails.map(item => ({
+                    const items = props.accommDetails.map(item => ({
                         ...item, accommodations: item.accommodations
                             .filter((acc) => acc.id !== id)
                     }))
-                    setAccommDeatils(items)
+                   // setAccommDeatils(items)
+                props.setAccommDetails(items)
                 }
             )
     }
@@ -75,7 +80,7 @@ const Accommodation = () => {
     let loggedUser = localStorage.getItem('user');
 
     let hotelList = <div>
-        {accommDetails.map((accommodation, i) => (
+        {props.accommDetails.map((accommodation, i) => (
             <div key={accommodation.id}>
                 {accommodation.accommodations.map(innerItem => (
                     <div key={accommodation.name}>
@@ -129,7 +134,7 @@ const Accommodation = () => {
 
     </div>
 
-    if (!accommDetails) {
+    if (!props.accommDetails) {
         hotelList = <p>Loading...</p>
     }
 
