@@ -9,7 +9,7 @@ const Navbar = (props) => {
     return(
         <div className={styleClasses.Navbar}>
             <Logo />
-            <SearchBar />
+            <SearchBar accommDetails={props.accommDetails} setAccommDetails={props.setAccommDetails}/>
             <div className={styleClasses.Wrapper}>
                 <div className={styleClasses.Username}>
                     {props.loggedUser ? <p>Zalogowany użytkownik: {props.loggedUser}</p> : null
